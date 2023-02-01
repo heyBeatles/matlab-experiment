@@ -3,22 +3,22 @@ close all
 clc
 alpha=1e-1;
 epsilon=1e3;
-K=1; % K-winner-take-all
+K=3; % K-winner-take-all
 
 L=[
-    0 -1  0 0 ;
-    -1 0 -1 0 ;
-    0 -1 0 -1 ;
-    0 0 -1 0 ];
+    0 -1  0 0 0;
+    -1 0 -1 0 0;
+    0 -1 0 -1 0;
+    0 0 -1 0 -1;
+    0 0 0 -1 0];
 
-u= [1.1; 2.5; 4; 3.2];
+u= [100; 3; 50; 2; 4];
 
 
 N = size(L,2);
 C_0=1;  %Here is the key, C_0 can take 1, otherwise the discrete model is not stable and will diverge
-x=rands(4,1);
-y=zeros(4,1);
-randSize = 100;  %Set the multiplier of the generated random number
+x=rands(N,1);
+y=zeros(N,1);
 vec_1=ones(N,1);
 tau = 1e-4;
 length =2000;
@@ -49,17 +49,18 @@ x_all(ind+1,:) = x';
 y_all(ind+1,:) = y';
 z_all(ind+1,:) = z';
 end
-t=(0:length-1)';
+k=(0:length-1)';
 figure
-plot(t,x_all)
-xlabel('t')
+plot(k,x_all)
+xlabel('k')
 ylabel('x')
 figure
-plot(t,y_all)
-xlabel('t')
+plot(k,y_all)
+xlabel('k')
 ylabel('y')
 figure
-plot(t,z_all)
-xlabel('t')
+plot(k,z_all)
+xlabel('k')
 ylabel('z')
+
 
